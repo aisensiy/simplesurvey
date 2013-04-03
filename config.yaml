@@ -1,0 +1,9 @@
+name: simplesurvey
+version: 2
+handle:
+- expire: if( path ~ "/static/" ) time 1000000
+- expire: if( path ~ "/is_login/" ) time 0
+- compress:  if( path ~ "/js/" ) compress
+- compress:  if( path ~ "/" ) compress
+- rewrite: if( path ~ "^(system|application).*") goto "/index.php/$1"
+- rewrite: if( !is_file() && path ~ "^(.*)$" ) goto "/index.php/$1"

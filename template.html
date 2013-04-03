@@ -1,0 +1,106 @@
+<script type="text/template" id="choice_tmp">
+	<!-- Sample
+	<legend class="desc">首次回国后找到工作所花时间 </legend>
+	<ul class="unstyled answer">
+		<li>
+			<span><label class="radio"><input name="test" type="radio" />一周以内</label></span>
+		</li>
+		<li><span><label class="radio"><input name="test" type="radio" />一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周</label></span></li>
+		<li><span><label class="radio"><input name="test" type="radio" />两周到一月</label></span></li>
+		<li><span><label class="radio"><input name="test" type="radio" />一月到三月</label></span></li>
+		<li><span><label class="radio"><input name="test" type="radio" />三个月以上</label></span></li>
+		<li class="clear"><span class="float"><label class="radio"><input name="test" type="radio" />其他</label></span><input type="text" /></li>
+	</ul>
+	-->
+	<legend class="desc">#{this.desc}</legend>
+	<ul class="unstyled answer">
+		var type = /single/i.test(this.type) ? 'radio' : 'checkbox';
+		$.each(this.answers, function(i, elem) {
+			<li>
+				<span><label class="#{type}"><input name="#{this.name}" type="#{type}" value="#{elem.val}"/>#{elem.desc}</label></span>
+			</li>
+		});
+		if(this.other) {
+			<li class="clear"><span class="float"><label class="#{type}"><input name="test" type="#{type}" />#{this.other.desc}</label></span><input type="text" /></li>
+		}
+	</ul>
+</script>
+<script>
+	
+</script>
+<script type="text/template" id="text_tmp">
+	<legend class="desc">#{this.desc}</legend>
+	<div class="answer">
+		<textarea rows="5" class="large" name="#{this.name}"></textarea>
+	</div>
+</script>
+
+<script type="text/template" id="matrix_tmp">
+	<!--
+	<legend class="desc">测试测试测试测试测试测试测试测试</legend>
+	<div class="answer">
+		<table border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped matrix">
+			<thead>
+				<tr>
+					<td></td>
+					<td>很不满意</td>
+					<td>不满意</td>
+					<td>一般</td>
+					<td>满意</td>
+					<td>很满意</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>外观</th>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+				</tr>
+				<tr>
+					<th>外观</th>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+				</tr>
+				<tr>
+					<th>外观</th>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+					<td><input type="radio" name="test2" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	-->
+	var type = /single/i.test(this.type) ? 'radio' : 'checkbox';
+	<legend class="desc">#{this.desc}</legend>
+	<div class="answer">
+		<table border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped matrix">
+			<thead>
+				<tr>
+					<td></td>
+					$.each(this.vals, function(i, elem) {
+						<td>elem</td>
+					});
+				</tr>
+			</thead>
+			<tbody>
+				$.each(this.questions, function(i, elem) {
+					<tr>
+						<th>#{elem.desc}</th>
+						$.each(this.vals, function(i, v) {
+							<td><input type="#{type}" name="#{v.val}" value=""/></td>
+						});
+					</tr>
+				});
+			</tbody>
+		</table>
+	</div>
+</script>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!--<link rel="stylesheet/less" href="less/bootstrap.less" media="all" type="text/css" />-->
+		
+		<script type="text/javascript" src='js/less.js'></script>
+		<script src="js/jquery.js"></script>
+		<link rel="stylesheet/less" href="less/custom.less" media="all" type="text/css" />
+		<script src="../staticlib/1/lib/js/jquery/jquery-1.7.1.min.js"></script>
+		<script src="../staticlib/1/lib/js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
+		<script src="../staticlib/1/lib/js/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../staticlib/1/lib/js/underscore/underscore-min.js"></script>
+		<script src="../staticlib/1/lib/js/less/less-1.2.1.min.js"></script>
+		<script src="../staticlib/1/lib/js/backbone/backbone-0.9.1-min.js"></script>
+		<script src="../staticlib/1/lib/js/ace/ace-template.js"></script>
+		<script src="js/jquery.utility.js" type="text/javascript" charset="utf-8"></script>
+		<link type="text/css" rel="stylesheet" href="../staticlib/1/lib/js/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../staticlib/1/lib/js/jquery/jquery-ui-1.8.17.custom.css" type="text/css" />
+		<!--[if IE]>
+		  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<style>
+		  article, aside, figure, footer, header, hgroup, 
+		  menu, nav, section { display: block; }
+		  body {
+		    padding-top: 60px;
+		  }
+		  div {
+		  	/*
+		  	outline: 3px solid rgba(0, 0, 255, .5);
+		  	min-height: 20px;
+		  	*/
+		  }
+		  .answer {
+		  	
+		  }
+		</style>
+		<script>
+		/*
+			$(function() {
+				$(".question .choice, .question .desc").dblclick(function() {
+					$(this).addClass("editing");
+					$("input", $(this)).focus();
+				});
+				$(".question .choice .edit, .question .desc .edit").blur(function() {
+					$(this).closest(".editing").removeClass("editing");
+				});
+			});
+		*/
+		$(function() {
+			$("ul.questions").sortable({
+				handle: 'legend',
+				placeholder: "state-highlight",
+				forcePlaceholderSize: true
+			});
+			$("ul.answer").sortable({
+				placeholder: "state-highlight",
+				forcePlaceholderSize: true
+			});
+			$('legend, header div.desc, header h2').dblclick(function() {
+				console.log(123);
+				$(this).editable();
+			});
+			$('ul.answer>li>span>label').dblclick(function() {
+				$(this).editable();
+			});
+			/*
+			$('.edit-panel').hide();
+			$("div.container").on("mouseenter", 'fieldset:has(.edit-panel), .answer>li:has(.edit-panel)', function() {
+				var editPanel = $(this).children('.edit-panel');
+				editPanel.fadeIn('fast');
+			});
+			$("div.container").on("mouseleave", 'fieldset:has(.edit-panel), .answer>li:has(.edit-panel)', function() {
+				var editPanel = $(this).children('.edit-panel');
+				editPanel.fadeOut('fast');
+			});
+			*/
+			/*
+			$('.edit-panel').hide().parent().live('mouseenter', function() {
+				$(this).children('.edit-panel').toggle('fast');
+			});
+			$('.edit-panel').parent().live('mouseleave', function() {
+				$(this).children('.edit-panel').toggle('fast');
+			});
+			*/
+			$('.inline > li').sameWidth(3);
+			$('textarea').autoWidth();
+			//$('.subnav').autoFix(40);
+		});
+		</script>
+	</head>
+	<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+					<a class="brand" href="#">Project name</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li class="active">
+								<a href="#">Home</a>
+							</li>
+							<li class="dropdown" id="menu1">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#menu1"> Dropdown <b class="caret"></b> </a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">Action</a>
+									</li>
+									<li>
+										<a href="#">Another action</a>
+									</li>
+									<li>
+										<a href="#">Something else here</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="#">Separated link</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#about">About</a>
+							</li>
+							<li>
+								<a href="#contact">Contact</a>
+							</li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+		
+		<div class="container">
+			<div class="row">
+				<div class="subnav span10 offset1">
+					<ul class="nav nav-pills">
+						<li class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">单选题 <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">列表单选</a>
+								</li>
+								<li>
+									<a href="#">下拉单选</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">多选题 <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">列表多选</a>
+								</li>
+								<li>
+									<a href="#">下拉多选</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" data-toggle="dropdown" class="dropdown-toggle">矩阵题 <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">矩阵单选</a>
+								</li>
+								<li>
+									<a href="#">矩阵多选</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">文本框</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="span8 offset2">
+					<!--form>section.survey>header>h2+div.desc-->
+					<form action="">
+						<section class="survey">
+							<header>
+								<h2>赴美留学生回国待遇情况调查</h2>
+								<div class="desc">先生女生，你好！我们是南开大学外国语学院和商学院09级的学生，正在开展对赴美留学生学习生活情况的调查。南开大学“百项工程”是于2002年启动的南开大学本科生创新科研计划项目，2011年是该活动的第10次开展。基于“以人为本，兴趣驱动，缜密遴选，自主实践，重在过程，严格管理，旨在育人”的原则，我们将通过网络对留美海归进行调查，以分析中国留学生在美国求学所遇到的文化，学习以及生活问题。</div>
+							</header>
+							<!--ul.questions>li-->
+							<ul class="questions unstyled">
+								<li>
+									<!--fieldset>legend.desc+ul.unstyled>li*5>span>input[type=radio]+label-->
+									<fieldset>
+										<legend class="desc">首次回国后找到工作所花时间 </legend>
+										<ul class="unstyled answer">
+											<li>
+												<span><label class="radio"><input name="test" type="radio" />一周以内</label></span>
+												<span class="edit-panel"><span class="icon-pencil" title="编辑"></span><span class="icon-remove" title="删除"></span></span>
+											</li>
+											<li>
+												<span><label class="radio"><input name="test" type="radio" />一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周一周到两周</label></span>
+												<span class="edit-panel"><span class="icon-pencil" title="编辑"></span><span class="icon-remove" title="删除"></span></span>
+											</li>
+											<li><span><label class="radio"><input name="test" type="radio" />两周到一月</label></span></li>
+											<li><span><label class="radio"><input name="test" type="radio" />一月到三月</label></span></li>
+											<li><span><label class="radio"><input name="test" type="radio" />三个月以上</label></span></li>
+											<li class="clear"><span class="float"><label class="radio"><input name="test" type="radio" />其他</label></span><input type="text" /></li>
+										</ul>
+										<span class="edit-panel"><span class="icon-pencil" title="编辑"></span><span class="icon-remove" title="删除"></span></span>
+									</fieldset>
+								</li>
+								<li>
+									<!--fieldset>legend.desc+ul.unstyled>li*5>span>input[type=radio]+label-->
+									<fieldset>
+										<legend class="desc">Overall, how satisfied were you with the product / service? </legend>
+										<ul class="unstyled answer inline">
+											<!--需要一个取最长宽度的js-->
+											<li>
+												<span><label class="checkbox"><input name="test" type="checkbox" />Very Satisfied</label></span>
+												<span class="edit-panel"><span class="icon-pencil" title="编辑"></span><span class="icon-remove" title="删除"></span></span>
+											</li>
+											<li><span><label class="checkbox"><input name="test" type="checkbox" />Satisfied</label></span></li>
+											<li><span><label class="checkbox"><input name="test" type="checkbox" />Neutral</label></span></li>
+											<li><span><label class="checkbox"><input name="test" type="checkbox" />Unsatisfied</label></span></li>
+											<li><span><label class="checkbox"><input name="test" type="checkbox" />Very Unsatisfied</label></span></li>
+											<li><span><label class="checkbox"><input name="test" type="checkbox" />Very Unsatisfied</label></span></li>
+											<li><span><label class="checkbox"><input name="test" type="checkbox" />Very fasdfsadfa</label></span></li>
+											<li><span><label class="checkbox"><input name="test" type="checkbox" />Very Unsatisfied</label></span></li>
+											<li><span><label class="checkbox"><input name="test" type="checkbox" />Very sfied</label></span></li>
+										</ul>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset>
+										<legend class="desc">请评价一下这个调查问卷</legend>
+										<div class="answer">
+											<textarea rows="5" class="large"></textarea>
+										</div>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset>
+										<legend class="desc">一个下拉选框的设计</legend>
+										<div class="answer">
+											<select class="span4">
+												<option>发撒旦发射点发生等发达省份</option>
+												<option>发撒旦发射点发生等发达省份阿斯蒂芬士大夫 </option>
+												<option>发撒旦发射点发生等发达省份</option>
+												<option>发撒旦发射点发生等发达省份</option>
+												<option>发撒旦发射点发生等发达省份</option>
+											</select>
+										</div>
+									</fieldset>
+								</li>
+								<li>
+									<fieldset>
+										<legend class="desc">一个下拉选框的设计</legend>
+										<div class="answer">
+											<select multiple="multiple" class="span4">
+												<option>发撒旦发射点发生等发达省份</option>
+												<option>发撒旦发射点发生等发达省份阿斯蒂芬士大夫 </option>
+												<option>发撒旦发射点发生等发达省份</option>
+												<option>发撒旦发射点发生等发达省份</option>
+												<option>发撒旦发射点发生等发达省份</option>
+											</select>
+										</div>
+									</fieldset>
+								</li>
+								<li>
+                  <fieldset>
+                    <legend class="desc">一个下拉选框的设计</legend>
+                    <div class="answer">
+                      <ul multiple="multiple" class="span4">
+                        <li>发撒旦发射点发生等发达省份</li>
+                        <li>发撒旦发射点发生等发达省份阿斯蒂芬士大夫 </li>
+                        <li>发撒旦发射点发生等发达省份</li>
+                        <li>发撒旦发射点发生等发达省份</li>
+                        <li>发撒旦发射点发生等发达省份</li>
+                      </ul>
+                    </div>
+                  </fieldset>
+                </li>
+								<li>
+									<fieldset>
+										<legend class="desc">测试测试测试测试测试测试测试测试</legend>
+										<div class="answer">
+											<table border="0" cellspacing="0" cellpadding="0" class="table table-bordered table-striped matrix">
+												<thead>
+													<tr>
+														<td></td>
+														<td>很不满意</td>
+														<td>不满意</td>
+														<td>一般</td>
+														<td>满意</td>
+														<td>很满意</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<th style="position: relative">
+														  外观
+														  <span class="edit-panel"><span class="icon-pencil" title="编辑"></span><span class="icon-remove" title="删除"></span></span>
+														</th>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+													</tr>
+													<tr>
+														<th>外观</th>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+													</tr>
+													<tr>
+														<th>外观</th>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+														<td><input type="radio" name="test2" /></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</fieldset>
+								</li>
+							</ul><!--end questions-->
+							<footer class="clear">
+								<div class="pull-right">
+									<button type="submit" class="btn btn-primary">提交</button>
+					            	<button type="reset" class="btn">Cancel</button>
+								</div>
+							</footer>
+						</section>
+					</form>
+				</div>
+			</div><!--end row-->
+		</div>
+	</body>
+</html>
